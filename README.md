@@ -16,7 +16,7 @@ npm run build    # static output in dist/
 
 Everything personal is in `src/config.js`: name, bio lines, socials, skills, tracks and mods.
 
-Add these files (they are not committed):
+Media lives in `public/`:
 
 | Path | What |
 |------|------|
@@ -27,7 +27,7 @@ Add these files (they are not committed):
 
 ## Mods tab
 
-Each entry in `config.mods.items` points at a repo under `config.mods.githubUser`. The Download button links the first `.jar` on that repo's latest GitHub release. Publish a release with the jar attached and the button lights up; until then it links to the releases page.
+Each entry in `config.mods.items` points at a repo under `config.mods.githubUser`. The site lists every published GitHub release of that repo in a version dropdown (newest stable selected and marked Latest, pre-releases labelled), and Download grabs the `.jar` attached to the chosen version. Publish a release with the jar attached and it appears automatically; until a repo has one, the button links to its releases page.
 
 ## Deploy
 

@@ -334,8 +334,46 @@ img { display: block; max-width: 100%; }
 .mod__name { margin: 0 0 4px; font: 500 20px/1.2 var(--font-display); color: var(--text-head); }
 .mod__desc { margin: 0 0 12px; max-width: 62ch; font-size: 14px; line-height: 1.43; color: var(--text-muted); }
 .mod__tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.mod__actions { display: grid; grid-template-columns: auto auto; gap: 8px; justify-items: stretch; }
-.mod__meta { grid-column: 1 / -1; font-size: 12px; color: var(--text-helper); text-align: center; }
+.mod__actions { display: grid; gap: 8px; width: 232px; }
+.mod__buttons { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.glass.mod.is-raised { z-index: 5; }
+
+/* version dropdown */
+.vsel { position: relative; }
+.vsel__btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; height: 38px; padding: 0 12px 0 14px;
+  border: 0; border-radius: var(--r-tag); background: rgba(255, 200, 190, 0.06); color: var(--text-head); cursor: pointer;
+  font: 500 14px/1 var(--font-body); box-shadow: var(--hairline); transition: background 0.18s, box-shadow 0.18s;
+}
+.vsel__btn:hover:not(:disabled) { background: rgba(255, 200, 190, 0.1); }
+.vsel.is-open .vsel__btn { box-shadow: inset 0 0 0 1px var(--edge-strong); background: rgba(255, 200, 190, 0.1); }
+.vsel__btn:disabled { cursor: default; color: var(--text-helper); }
+.vsel__value { display: flex; align-items: center; gap: 8px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.vsel__chev { width: 16px; height: 16px; flex: none; color: var(--text-muted); transition: transform 0.25s var(--ease); }
+.vsel.is-open .vsel__chev { transform: rotate(180deg); }
+.vsel__latest, .vsel__pre {
+  padding: 2px 6px; border-radius: 4px; font: 500 11px/1.3 var(--font-body);
+  background: rgba(224, 22, 43, 0.18); color: #ffb3aa; box-shadow: inset 0 0 0 1px rgba(255, 90, 80, 0.25);
+}
+.vsel__pre { background: rgba(255, 200, 190, 0.08); color: var(--text-muted); box-shadow: inset 0 0 0 1px var(--edge); }
+.vsel__list {
+  position: absolute; z-index: 30; top: calc(100% + 6px); right: 0; width: max(100%, 300px); margin: 0; padding: 6px; list-style: none;
+  background: #140809; backdrop-filter: none; -webkit-backdrop-filter: none;
+  box-shadow: inset 0 1px 1px rgba(255, 214, 208, 0.16), 0 24px 48px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 180, 170, 0.1);
+  max-height: 260px; overflow-y: auto; outline: none; scrollbar-width: thin; scrollbar-color: rgba(255, 180, 170, 0.2) transparent;
+  border-radius: 12px; transform-origin: top center; animation: vsel-in 0.18s var(--ease);
+}
+@keyframes vsel-in { from { opacity: 0; transform: translateY(-4px) scale(0.98); } }
+.vsel__opt {
+  position: relative; display: grid; gap: 2px; padding: 9px 32px 9px 10px; border-radius: 8px; cursor: pointer;
+}
+.vsel__opt.is-focus { background: rgba(255, 200, 190, 0.08); }
+.vsel__opt[aria-selected='true'] .vsel__tag { color: #fff; }
+.vsel__tag { white-space: nowrap; display: flex; align-items: center; gap: 8px; font: 500 14px/1.3 var(--font-body); color: var(--text-body); font-variant-numeric: tabular-nums; }
+.vsel__sub { font-size: 12px; line-height: 1.33; color: var(--text-helper); }
+.vsel__check { position: absolute; right: 10px; top: 50%; width: 15px; height: 15px; translate: 0 -50%; color: var(--ruby-hot); }
+
+.mod__meta { font-size: 12px; color: var(--text-helper); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mod__meta.is-loading { animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: 0.4; } }
 .glass.mod { transition: box-shadow 0.25s; }
@@ -360,7 +398,7 @@ img { display: block; max-width: 100%; }
   .player__controls { margin-left: auto; }
   .stack { grid-template-columns: 1fr; padding: 24px; }
   .mod { grid-template-columns: auto 1fr; }
-  .mod__actions { grid-column: 1 / -1; }
+  .mod__actions { grid-column: 1 / -1; width: auto; }
   .player__lyrics { padding: 0 20px; }
   .player__head { flex-wrap: wrap; }
   .statusbar { display: none; }
